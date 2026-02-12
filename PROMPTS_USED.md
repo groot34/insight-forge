@@ -5,7 +5,7 @@ This document records the key prompts and directives used during the development
 ## Phase 1: Rebranding & UI Overhaul
 *   "Rebrand the application from 'CSV Insights' to 'Insight Forge'."
 *   "Implement a 'Deep Blue/Purple, space-like' theme using CSS variables."
-*   "Integrate a Three.js animated shader background behind the content."
+*   "Integrate a lightweight CSS animated background behind the content."
 *   "Fix the chart colors to use `oklch` variables compatible with the new theme."
 
 ## Phase 2: Debugging & Refinement
@@ -25,7 +25,7 @@ This document records the key prompts and directives used during the development
 
 ## Phase 5: Code Explanation & Walkthrough
 *   "Explain the `app/status/page.tsx` file and how the health checks work."
-*   "Explain the `components/ui/animated-shader-background.tsx` file and how Three.js is integrated."
+*   "Explain the `components/ui/animated-shader-background.tsx` file and how CSS animations are used."
 *   "Explain the `app/api/upload/route.ts` file and how CSV parsing works."
 *   "Explain the `app/api/generate-insights/route.ts` file and how the Groq API is called."
 *   "Explain the `app/globals.css` file and how `oklch` colors are used for theming."

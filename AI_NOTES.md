@@ -3,7 +3,6 @@
 ## AI Usage in Development
 During the development of Insight Forge, AI was leveraged for several key areas:
 
-*   **Code Generation**: Scaffolding UI components (Shadcn UI), implementing the Three.js animated background (`AnoAI`), and writing API routes for file processing.
 *   **Debugging**: Identifying and resolving hydration errors in Next.js and fixing TypeScript type mismatches in the upload route.
 *   **Refactoring**: converting standard CSS colors to `oklch` variables to match the new "Deep Blue" theme.
 *   **Documentation**: Generating the initial structure for `README.md` and `DEPLOYMENT.md`.

@@ -34,7 +34,7 @@ Based on the project agenda:
 - **Styling**: Tailwind CSS, CSS Variables, Shadcn UI
 - **Database**: PostgreSQL (via Prisma ORM)
 - **AI Provider**: Groq
-- **Visualization**: Recharts, Three.js (Background)
+- **Visualization**: Recharts, CSS Animations (Background)
 - **Deployment**: Vercel Ready
 
 ## Getting Started
