@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       filename: file.name,
       columns,
       rowCount,
-      dataJson: first100,
+      dataJson: first100 as any,
     });
 
     return NextResponse.json({
