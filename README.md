@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Insight Forge
+
+Transform raw CSV data into actionable intelligence. Upload, analyze, and visualize with the power of AI.
+
+## Overview
+
+Insight Forge is a modern web application designed to simplify data analysis. It allows users to upload CSV files, preview the data in an interactive table, view automatic visualizations, and generate AI-powered insights using Groq.
+
+## Features Checklist
+
+Based on the project agenda:
+
+### ✅ Done
+- [x] **Upload CSV**: Support for `.csv` files up to 5MB.
+- [x] **Data Preview**: Interactive, sortable, and paginated table view of the uploaded data.
+- [x] **AI Insights**: Generates a summary of trends, outliers, and key findings using Groq AI.
+- [x] **Simple Charts**: Auto-generates Bar, Line, and Pie charts based on data types (Numeric, Time-series, Categorical).
+- [x] **Save & History**: Save generated reports and view the last 5 reports.
+- [x] **Export**: Copy reports to clipboard or download as Markdown (`.md`).
+- [x] **Home Page**: Clean, modern landing page with clear steps.
+- [x] **Status Page**: Real-time health check for Backend, Database, and AI connection.
+- [x] **Input Handling**: Validation for file type, size, and empty inputs with user-friendly toast notifications.
+- [x] **Modern UI**: "Deep Blue/Purple" space-themed aesthetic with glassmorphism and animated backgrounds.
+
+### 🚧 Not Done / Future Improvements
+- [ ] **Column Selection**: Currently, the AI analyzes the first 100 rows of the entire dataset. Explicit column selection for focused analysis is not yet implemented.
+- [ ] **Follow-up Questions**: The ability to ask chat-like follow-up questions to the AI about the data is not yet implemented.
+- [ ] **Advanced Chart Customization**: Charts are auto-detected; users cannot currently customize axes or chart types manually.
+
+## Technology Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS, CSS Variables, Shadcn UI
+- **Database**: PostgreSQL (via Prisma ORM)
+- **AI Provider**: Groq
+- **Visualization**: Recharts, Three.js (Background)
+- **Deployment**: Vercel Ready
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js & npm
+- PostgreSQL Database URL
+- Groq API Key
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Local Setup
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1.  **Clone the repository**:
+    ```bash
+    git clone <repository-url>
+    cd insight-forge
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    # or
+    npm ci
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3.  **Environment Variables**:
+    Create a `.env` file in the root directory:
+    ```env
+    DATABASE_URL="postgresql://user:password@localhost:5432/insight_forge"
+    GROQ_API_KEY="gsk_..."
+    ```
 
-## Learn More
+4.  **Database Setup**:
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    ```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5.  **Run Development Server**:
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.

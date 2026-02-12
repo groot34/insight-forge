@@ -57,7 +57,7 @@ export default function HomePage() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/20 mb-8 ring-1 ring-primary/30 shadow-lg shadow-primary/20 backdrop-blur-sm animate-float">
             <BarChart3 className="h-10 w-10 text-primary" />
           </div>
-          <h1 className="text-6xl font-extrabold tracking-tight text-foreground mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-blue-500">
+          <h1 className="text-6xl font-extrabold tracking-tight text-foreground mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-blue-500 pb-4">
             Insight Forge
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
