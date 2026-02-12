@@ -28,12 +28,12 @@ const steps = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-primary" />
-            <span className="font-semibold text-foreground">CSV Insights</span>
+            <span className="font-semibold text-foreground text-lg tracking-tight">Insight Forge</span>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/reports">
@@ -54,21 +54,20 @@ export default function HomePage() {
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-md bg-primary/10 mb-6">
-            <BarChart3 className="h-8 w-8 text-primary" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/20 mb-8 ring-1 ring-primary/30 shadow-lg shadow-primary/20 backdrop-blur-sm animate-float">
+            <BarChart3 className="h-10 w-10 text-primary" />
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground mb-4">
-            CSV Insights Dashboard
+          <h1 className="text-6xl font-extrabold tracking-tight text-foreground mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-blue-500">
+            Insight Forge
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Upload your CSV files, preview the data, and generate AI-powered
-            insights with automatic chart visualization.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Transform raw CSV data into actionable intelligence. Upload, analyze, and visualize with the power of AI.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {steps.map((s) => (
-            <Card key={s.step} className="p-6 hover-elevate">
+            <Card key={s.step} className="p-6 hover-elevate bg-card/60 backdrop-blur-md border-primary/10 shadow-xl shadow-black/5 hover:border-primary/30 transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
                   <s.icon className="h-5 w-5 text-primary" />
