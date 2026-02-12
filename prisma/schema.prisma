@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CsvUpload {
+  id        Int      @id @default(autoincrement())
+  filename  String
+  columns   Json
+  rowCount  Int      @map("row_count")
+  dataJson  Json     @map("data_json")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("csv_uploads")
+}
+
+model Report {
+  id          Int      @id @default(autoincrement())
+  uploadId    Int      @map("upload_id")
+  fileName    String   @map("file_name")
+  summaryText String   @map("summary_text")
+  columnsJson Json     @map("columns_json")
+  rowCount    Int      @map("row_count")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("reports")
+}
