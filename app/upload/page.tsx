@@ -1,5 +1,7 @@
 "use client";
 
+
+import { toast } from "sonner";
 import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -48,11 +50,11 @@ import {
 } from "recharts";
 
 const CHART_COLORS = [
-  "hsl(217, 91%, 60%)",
-  "hsl(173, 58%, 39%)",
-  "hsl(43, 74%, 49%)",
-  "hsl(27, 87%, 67%)",
-  "hsl(197, 37%, 24%)",
+  "oklch(0.646 0.222 41.116)",
+  "oklch(0.6 0.118 184.704)",
+  "oklch(0.398 0.07 227.392)",
+  "oklch(0.828 0.189 84.429)",
+  "oklch(0.769 0.188 70.08)",
 ];
 
 interface UploadResult {
@@ -305,22 +307,23 @@ function ChartDisplay({ chart }: { chart: ChartConfig }) {
     return (
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chart.data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
           <XAxis
             dataKey={chart.labelKey || "label"}
             tick={{ fontSize: 11 }}
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--muted-foreground)"
           />
           <YAxis
             tick={{ fontSize: 11 }}
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--muted-foreground)"
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
+              backgroundColor: "var(--card)",
+              borderColor: "var(--border)",
               borderRadius: "6px",
               fontSize: "12px",
+              color: "var(--card-foreground)",
             }}
           />
           <Bar
@@ -337,22 +340,23 @@ function ChartDisplay({ chart }: { chart: ChartConfig }) {
     return (
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={chart.data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
           <XAxis
             dataKey={chart.labelKey || "label"}
             tick={{ fontSize: 11 }}
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--muted-foreground)"
           />
           <YAxis
             tick={{ fontSize: 11 }}
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--muted-foreground)"
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
+              backgroundColor: "var(--card)",
+              borderColor: "var(--border)",
               borderRadius: "6px",
               fontSize: "12px",
+              color: "var(--card-foreground)",
             }}
           />
           <Line
@@ -389,10 +393,11 @@ function ChartDisplay({ chart }: { chart: ChartConfig }) {
           </Pie>
           <Tooltip
             contentStyle={{
-              backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
+              backgroundColor: "var(--card)",
+              borderColor: "var(--border)",
               borderRadius: "6px",
               fontSize: "12px",
+              color: "var(--card-foreground)",
             }}
           />
           <Legend />
@@ -448,8 +453,10 @@ export default function UploadPage() {
       setReportSaved(false);
       const detectedCharts = detectCharts(data.columns, data.data);
       setCharts(detectedCharts);
+      toast.success("File uploaded successfully");
     } catch (err: any) {
       setError(err.message || "Upload failed");
+      toast.error(err.message || "Upload failed");
     } finally {
       setUploading(false);
     }
@@ -482,8 +489,10 @@ export default function UploadPage() {
       }
       const data = await res.json();
       setInsights(data.insights);
+      toast.success("Insights generated successfully");
     } catch (err: any) {
       setError(err.message || "Failed to generate insights");
+      toast.error(err.message || "Failed to generate insights");
     } finally {
       setGenerating(false);
     }
@@ -507,8 +516,10 @@ export default function UploadPage() {
       });
       if (!res.ok) throw new Error("Failed to save report");
       setReportSaved(true);
+      toast.success("Report saved successfully");
     } catch (err: any) {
       setError(err.message);
+      toast.error("Failed to save report");
     } finally {
       setSaving(false);
     }
@@ -516,7 +527,7 @@ export default function UploadPage() {
 
   const buildMarkdown = () => {
     return [
-      `# CSV Insights Report`,
+      `# Insight Forge Report`,
       ``,
       `**File:** ${uploadResult?.filename}`,
       `**Rows:** ${uploadResult?.rowCount}`,
@@ -534,6 +545,7 @@ export default function UploadPage() {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(buildMarkdown());
+    toast.success("Report copied to clipboard");
   };
 
   const downloadMarkdown = () => {
@@ -556,7 +568,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-2">
@@ -576,7 +588,7 @@ export default function UploadPage() {
           </div>
           <div className="flex items-center gap-2">
             <Link href="/reports">
-              <Button variant="ghost" size="sm" data-testid="link-reports">
+              <Button variant="ghost" size="sm" data-testid="link-reports" className="hover:bg-primary/10 hover:text-primary transition-colors">
                 <FileText className="h-4 w-4 mr-1.5" />
                 Reports
               </Button>
