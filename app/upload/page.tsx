@@ -446,14 +446,22 @@ export default function UploadPage() {
         const errData = await res.json().catch(() => ({ message: "Upload failed" }));
         throw new Error(errData.message || "Upload failed");
       }
-      const data: UploadResult = await res.json();
+      const data: UploadResult & { warnings?: string[] } = await res.json();
       setUploadResult(data);
       setInsights(null);
       setCharts([]);
       setReportSaved(false);
       const detectedCharts = detectCharts(data.columns, data.data);
       setCharts(detectedCharts);
-      toast.success("File uploaded successfully");
+
+      if (data.warnings && data.warnings.length > 0) {
+        toast.warning(`Uploaded with issues: ${data.warnings.length} rows skipped.`, {
+          description: "Some rows were missing data and have been excluded.",
+          duration: 6000,
+        });
+      } else {
+        toast.success("File uploaded successfully");
+      }
     } catch (err: any) {
       setError(err.message || "Upload failed");
       toast.error(err.message || "Upload failed");

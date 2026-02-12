@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     }
 
     const csvText = await file.text();
-    const { data: allRows, columns, errors } = parseCSV(csvText);
+    const { data: allRows, columns, errors, warnings } = parseCSV(csvText);
 
     if (errors.length > 0 && allRows.length === 0) {
       return NextResponse.json(
@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
     }
 
     const rowCount = allRows.length;
+    // Store only first 100 rows for preview/display to avoid payload limits
     const first100 = allRows.slice(0, 100);
 
     const csvUpload = await storage.createCsvUpload({
@@ -51,6 +52,7 @@ export async function POST(request: NextRequest) {
       columns,
       rowCount,
       data: first100,
+      warnings, // Pass warnings to frontend
     });
   } catch (err: any) {
     return NextResponse.json(
