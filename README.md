@@ -33,8 +33,11 @@ Based on the project agenda:
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS, CSS Variables, Shadcn UI
 - **Database**: PostgreSQL (via Prisma ORM)
-- **AI Provider**: Groq
+- **AI Provider**: Groq (with Zod validation & retry logic)
 - **Visualization**: Recharts, CSS Animations (Background)
+- **Validation**: Zod (input & AI output validation)
+- **Testing**: Vitest (unit tests)
+- **Logging**: Structured JSON logging
 - **Deployment**: Vercel Ready
 
 ## Getting Started
@@ -77,3 +80,16 @@ Based on the project agenda:
     npm run dev
     ```
     Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Testing
+
+Run the automated test suite:
+```bash
+npm test
+```
+
+This runs unit tests covering:
+- **CSV Parsing** (`lib/csv.ts`): Valid/empty/malformed data, dynamic typing, whitespace trimming
+- **AI Integration** (`lib/groq.ts`): Successful calls, empty/invalid responses, retry logic, exhausted retries
+- **Input Validation** (`lib/validators.ts`): Schema enforcement for all API inputs
+

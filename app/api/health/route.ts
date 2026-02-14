@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import Groq from "groq-sdk";
+import { logger } from "@/lib/logger";
 
 export async function GET() {
   const result: any = {
@@ -14,6 +15,7 @@ export async function GET() {
     result.database = { status: "ok", message: "Connected" };
   } catch (err: any) {
     result.database = { status: "error", message: err.message };
+    logger.error("Health check: database connection failed", err);
   }
 
   try {
@@ -28,7 +30,13 @@ export async function GET() {
     }
   } catch (err: any) {
     result.groq = { status: "error", message: err.message };
+    logger.error("Health check: Groq connection failed", err);
   }
+
+  logger.info("Health check completed", {
+    database: result.database.status,
+    groq: result.groq.status,
+  });
 
   return NextResponse.json(result);
 }

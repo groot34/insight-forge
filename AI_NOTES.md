@@ -13,6 +13,13 @@ While AI handled heavy lifting, manual verification was strictly applied:
 *   **Build Integrity**: Manually ran `npm run build` to ensure all type errors (like the `JsonValue` issue) were truly resolved.
 *   **Security**: Checked that sensitive keys are loaded via environment variables and not hardcoded.
 *   **User Experience**: Verified that toast notifications appear correctly and the flow from upload to insight generation is smooth.
+
+### Operational Rigor
+*   **Structured JSON Logging**: A custom `lib/logger.ts` outputs structured JSON logs (`{timestamp, level, message, context}`) to `console`, which Vercel captures automatically. All 4 API routes are instrumented with request-level logging.
+*   **Zod Input Validation**: All API inputs are validated using Zod schemas (`lib/validators.ts`), replacing manual `if (!field)` checks with type-safe parsing that provides clear error messages.
+*   **AI Response Validation**: The Groq API response is validated with a Zod schema to catch malformed or empty responses before they reach the user.
+*   **Retry with Backoff**: AI calls use exponential backoff with a **maximum of 2 retries** (3 total attempts) to balance reliability with free-tier API credit conservation.
+*   **Automated Tests**: A Vitest test suite covers CSV parsing, AI integration (with mocked SDK), and input validation schemas (22 tests total).
 *   **Cost Control & Manual Integration**: Chose **Groq** for its free tier (no credit card required) and manually wrote the core integration logic (`lib/groq.ts`) to ensure reliability and avoid AI-generated hallucinations in the critical API layer.
 
 ## App's AI Provider: Groq
